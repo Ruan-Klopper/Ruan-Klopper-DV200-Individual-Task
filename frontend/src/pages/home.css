@@ -1,0 +1,377 @@
+@import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap");
+
+.h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+div {
+  font-family: "League Spartan", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+html {
+  background-color: #282828;
+}
+
+.main {
+  background-color: #161616;
+  width: 100%;
+  height: 90vh;
+  overflow-y: scroll;
+}
+
+/* Navbar */
+.navBar {
+  width: 100%;
+  height: 10vh;
+  background-color: #282828;
+  padding-left: 100px;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Hero */
+.heroSection {
+  width: 100%;
+  height: 800px;
+  background-image: url("../../assets/houseCarousel1.jpeg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.heroImgOverlay {
+  width: 100%;
+  height: 800px;
+  margin-bottom: -800px;
+  padding-top: 130px;
+  background: rgb(4, 134, 232);
+  background: linear-gradient(
+    137deg,
+    rgba(4, 134, 232, 0.4) 0%,
+    rgba(189, 255, 0, 0.2) 100%
+  );
+}
+
+.heroTextGroup {
+  width: 950px;
+  margin: 0 auto;
+}
+
+/* On Show section */
+.onShowSection {
+  width: 100%;
+  background-color: #282828;
+  border-radius: 50px;
+  margin-top: -50px;
+  display: flex;
+  justify-content: space-around;
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+.onShowLeft {
+  width: 400px;
+}
+
+.onShowRight {
+  width: 1200px;
+  height: 300px;
+  overflow: auto;
+  padding: 40px;
+  background-color: #161616;
+  border-radius: 55px;
+}
+
+/* All Properties section */
+.allPropertiesSection {
+  width: 90%;
+  padding-top: 100px;
+  padding-bottom: 100px;
+  margin: 0 auto;
+}
+
+.allPropertiesTop {
+  display: flex;
+  justify-content: space-between;
+}
+
+.allPropertiesCategories {
+  display: flex;
+}
+
+.allPropertiesContainer {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding-top: 100px;
+}
+
+/* List your property section */
+.listYourPropertySection {
+  background-color: #282828;
+  width: 100%;
+  height: 100vh;
+  border-radius: 50px 50px 0px 0px;
+}
+
+.listYourPropertySectionImg {
+  width: 70%;
+  height: 100vh;
+  margin-left: 30%;
+  border-radius: 50px 50px 0px 0px;
+  background-image: url("../../assets/houseCarousel1.jpeg");
+  background-size: cover;
+}
+
+.listYourPropertySectionImgOverlay {
+  width: 70%;
+  height: 100vh;
+  margin-left: 30%;
+  margin-top: -100vh;
+  margin-bottom: -100vh;
+  border-radius: 50px 50px 0px 0px;
+  background: rgb(40, 40, 40);
+  background: linear-gradient(
+    90deg,
+    rgba(40, 40, 40, 1) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+.listYourPropertySectionImgForm {
+  padding-left: 100px;
+  padding-right: 100px;
+  padding-top: 70px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.listHouseForm {
+  width: 30%;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-split {
+  display: flex;
+}
+
+.listHouseInput {
+  height: 60px;
+  border-radius: 30px;
+  background-color: #161616;
+  border-style: none;
+  padding-left: 30px;
+  font-size: 18px;
+  margin-bottom: 30px;
+  color: white;
+}
+
+.listHouseLabel {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  margin-left: 25px;
+}
+
+.listHouseCbx {
+  width: 30px;
+  height: 30px;
+}
+
+.listHouseSubmitBtn {
+  width: 100%;
+  height: 50px;
+  background-color: #0486e8;
+  border-style: none;
+  border-radius: 25px;
+  font-size: 20px;
+  font-family: "League Spartan", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-weight: 600;
+  padding-top: 5px;
+  color: white;
+}
+/* Footer */
+
+/* ---------------------------------------- */
+
+/* Compoments */
+
+/* Inputs */
+.inputLong {
+  width: 950px;
+  margin: 0 auto;
+  display: flex;
+  margin-top: 80px;
+}
+
+.inputLongBody {
+  width: 950px;
+  height: 70px;
+  border-radius: 35px;
+  background-color: #282828;
+  padding-left: 35px;
+  /* padding-right: ;
+  padding-top: ;
+  padding-bottom: ; */
+  border-style: none;
+  font-size: 20px;
+  font-family: "League Spartan", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  color: white;
+}
+
+.inputShort {
+  width: 500px;
+  display: flex;
+  margin-top: 80px;
+}
+
+.inputShortBody {
+  width: 500px;
+  height: 70px;
+  border-radius: 35px;
+  padding-left: 35px;
+  /* padding-right: ;
+  padding-top: ;
+  padding-bottom: ; */
+  border-style: none;
+  font-size: 20px;
+  font-family: "League Spartan", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  color: white;
+}
+
+/* Buttons */
+.searchButton {
+  width: 120px;
+  height: 50px;
+  background-color: #0486e8;
+  border-style: none;
+  border-radius: 25px;
+  font-size: 20px;
+  font-family: "League Spartan", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-weight: 600;
+  padding-top: 5px;
+  color: white;
+}
+
+.PropertyCardButton {
+  width: auto;
+  height: 50px;
+  background-color: #0486e8;
+  border-style: none;
+  border-radius: 25px;
+  font-size: 20px;
+  font-family: "League Spartan", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-weight: 600;
+  padding-top: 5px;
+  padding-left: 25px;
+  padding-right: 25px;
+  color: white;
+}
+
+/* Property on show card element */
+.PropertyShowCardBody {
+  background-color: #282828;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
+  padding: 20px;
+  border-radius: 35px;
+}
+
+.PSC-Left {
+  display: flex;
+}
+
+.PSC-MId {
+  margin-left: 20px;
+}
+
+.propertyShowImg {
+  width: 270px;
+  height: 270px;
+  background-color: gray;
+  border-radius: 28px;
+  background-size: cover;
+}
+
+.PSC-Right {
+  width: 300px;
+}
+
+.rating-panel {
+  display: flex;
+  justify-content: space-between;
+}
+
+.rating-left {
+  text-align: right;
+}
+
+.rating-right {
+  width: 100px;
+  height: 50px;
+  background-color: white;
+  color: #282828;
+  text-align: center;
+  border-radius: 25px;
+}
+
+.price-panel {
+  text-align: right;
+  margin-top: 100px;
+}
+
+.bigContactButton {
+  width: 100%;
+  height: 50px;
+  background-color: #0486e8;
+  border-style: none;
+  border-radius: 25px;
+  font-size: 20px;
+  font-family: "League Spartan", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-weight: 600;
+  padding-top: 5px;
+  color: white;
+}
+
+/* Property card element */
+.propertyCardBody {
+  width: 400px;
+  height: 420px;
+  background-color: #282828;
+  margin-left: 20px;
+  margin-right: 20px;
+  border-radius: 30px;
+  margin-bottom: 40px;
+}
+
+.propertyCardImg {
+  width: 400px;
+  height: 200px;
+  background-color: lightgray;
+  border-radius: 30px;
+  margin-bottom: 35px;
+  background-size: cover;
+}
