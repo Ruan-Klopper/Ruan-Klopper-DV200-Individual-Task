@@ -58,6 +58,7 @@ html {
 
 .heroTextGroup {
   width: 950px;
+  padding-top: 200px;
   margin: 0 auto;
 }
 
@@ -285,6 +286,35 @@ html {
   padding-left: 25px;
   padding-right: 25px;
   color: white;
+  cursor: pointer;
+}
+
+.PropertyCardButton:hover {
+  background-color: #00518f;
+  color: white;
+}
+
+.PropertyCardButtonUpdate {
+  width: auto;
+  height: 50px;
+  background-color: #161616;
+  border-style: none;
+  border-radius: 25px;
+  font-size: 20px;
+  font-family: "League Spartan", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-weight: 600;
+  padding-top: 5px;
+  padding-left: 25px;
+  padding-right: 25px;
+  color: white;
+  cursor: pointer;
+}
+
+.PropertyCardButtonUpdate:hover {
+  background-color: #414141;
+  color: white;
 }
 
 /* Property on show card element */
@@ -359,12 +389,17 @@ html {
 /* Property card element */
 .propertyCardBody {
   width: 400px;
-  height: 420px;
   background-color: #282828;
   margin-left: 20px;
   margin-right: 20px;
   border-radius: 30px;
   margin-bottom: 40px;
+}
+
+.propertyCardBodyText {
+  padding-left: 35px;
+  padding-right: 35px;
+  margin-bottom: 35px;
 }
 
 .propertyCardImg {
@@ -374,4 +409,21 @@ html {
   border-radius: 30px;
   margin-bottom: 35px;
   background-size: cover;
+}
+
+.deleteButton {
+  width: 40px;
+  height: 40px;
+  color: white;
+  background-color: #0486e8;
+  border-style: none;
+  border-radius: 20px;
+  margin-top: 20px;
+  margin-left: 340px;
+  cursor: pointer;
+}
+
+.deleteButton:hover {
+  color: white;
+  background-color: #282828;
 }

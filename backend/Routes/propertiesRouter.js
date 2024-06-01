@@ -44,4 +44,57 @@ router.get("/", async (req, res) => {
   }
 });
 
+// Delete property by ID
+router.delete("/delete/:id", async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const property = await Property.findByIdAndDelete(id);
+
+    if (!property) {
+      return res.status(404).json({ error: "Property not found" });
+      console.log("Property not found " + id);
+    }
+
+    res.status(200).json({ message: "Property deleted successfully" });
+    console.log("Property deleted successfully");
+  } catch (err) {
+    res.status(500).json({ error: "Could not delete property" });
+    console.log("error " + id);
+  }
+});
+
+// Delete property by ID 2
+router.post("/deleteProperty/:id", async (req, res) => {
+  const { id } = req.body;
+  try {
+    Property.deleteOne({ _id: id }, function (err, res) {
+      console.log(err);
+    });
+    res.send({ status: "Ok", data: "Deleted" });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+// Update property by ID
+router.put("/update/:id", async (req, res) => {
+  const { id } = req.params;
+  const updates = req.body;
+
+  try {
+    const property = await Property.findByIdAndUpdate(id, updates, {
+      new: true,
+    });
+
+    if (!property) {
+      return res.status(404).json({ error: "Property not found" });
+    }
+
+    res.status(200).json(property);
+  } catch (err) {
+    res.status(500).json({ error: "Could not update property" });
+  }
+});
+
 module.exports = router;

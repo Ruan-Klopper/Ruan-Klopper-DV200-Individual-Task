@@ -1,12 +1,17 @@
 import "./home.css";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "jquery";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 const Navbar = () => {
   return (
     <div className="navBar">
       <div className="navLeft">
-        <h1 style={{ fontSize: "48px", color: "white" }}>Building48</h1>
+        <h1 style={{ fontSize: "48px", color: "white", marginTop: "32px" }}>
+          Building48
+        </h1>
       </div>
       <div className="navRight">
         <div
@@ -81,29 +86,100 @@ const PropertyShowCard = ({
   );
 };
 
-const PropertyCard = ({ houseName, rooms, image }) => {
+const PropertyCard = ({ id, houseName, rooms, image, onDelete }) => {
+  const handleDelete = async () => {
+    try {
+      const response = await axios.delete(
+        `http://localhost:3001/api/Properties/delete/${id}`
+      );
+      if (response.status === 200) {
+        console.log("Property deleted successfully");
+        onDelete(id);
+      } else {
+        console.log("Error deleting property");
+      }
+    } catch (error) {
+      console.error("There was an error deleting the property!", error);
+    }
+  };
+
   return (
     <div className="propertyCardBody">
       <div
         className="propertyCardImg"
         style={{ backgroundImage: `url(${image})` }}
-      ></div>
-      <h1 style={{ marginLeft: "35px", color: "white" }}>{houseName}</h1>
-      <h1
-        style={{
-          marginLeft: "35px",
-          color: "white",
-          fontWeight: "400",
-          marginTop: "-5px",
-          marginBottom: "30px",
-          fontSize: "24px",
-        }}
       >
-        {rooms}
-      </h1>
-      <button className="PropertyCardButton" style={{ marginLeft: "35px" }}>
-        Contact agent
-      </button>
+        <button className="deleteButton" onClick={handleDelete}>
+          X
+        </button>
+      </div>
+      <div className="propertyCardBodyText">
+        <h1 style={{ color: "white" }}>{houseName}</h1>
+        <h1
+          style={{
+            color: "white",
+            fontWeight: "400",
+            marginTop: "-5px",
+            marginBottom: "30px",
+            fontSize: "24px",
+          }}
+        >
+          {rooms}
+        </h1>
+
+        <button className="PropertyCardButton" style={{ marginRight: "10px" }}>
+          Contact
+        </button>
+
+        <button
+          type="button"
+          className="PropertyCardButtonUpdate"
+          data-toggle="modal"
+          data-target="#updatePropertyModal"
+        >
+          Update info
+        </button>
+
+        <div
+          className="modal fade"
+          id="updatePropertyModal"
+          tabIndex="-1"
+          role="dialog"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div className="modal-dialog" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title" id="exampleModalLabel">
+                  Modal title
+                </h5>
+                <button
+                  type="button"
+                  className="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div className="modal-body">...</div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button type="button" className="btn btn-primary">
+                  Save changes
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
@@ -118,7 +194,7 @@ function Home() {
   const [image, setImage] = useState("");
   const [rating, setRating] = useState([]);
   const [onShow, setOnShow] = useState(false);
-  const imageArray: string[] = [
+  const imageArray = [
     "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?cs=srgb&dl=pexels-binyaminmellish-186077.jpg&fm=jpg",
     "https://www.bhg.com/thmb/H9VV9JNnKl-H1faFXnPlQfNprYw=/1799x0/filters:no_upscale():strip_icc()/white-modern-house-curved-patio-archway-c0a4a3b3-aa51b24d14d0464ea15d36e05aa85ac9.jpg",
     "https://www.wilsonhomes.com.au/sites/default/files/styles/blog_hero_banner/public/My%20project%20-%202023-06-20T095818.329%20%281%29_0.jpg",
@@ -127,19 +203,15 @@ function Home() {
     "https://i.ytimg.com/vi/_L6jEtMK8No/maxresdefault.jpg",
     "https://foyr.com/learn/wp-content/uploads/2022/06/types-of-house-styles-and-homes.jpg",
   ];
-  // Select a random image URL from imageArray
   const randomImage = imageArray[Math.floor(Math.random() * imageArray.length)];
-
-  // Generate random ratings
   const randomRating = [
     Math.random() < 0.5 ? "good" : "bad",
     Math.floor(Math.random() * 11),
     Math.floor(Math.random() * 100),
   ];
-
   const macPort = 3001;
 
-  useEffect(() => {
+  const fetchProperties = () => {
     axios
       .get(`http://localhost:${macPort}/api/Properties`)
       .then((response) => {
@@ -149,6 +221,10 @@ function Home() {
       .catch((error) => {
         console.error("There was an error fetching the properties!", error);
       });
+  };
+
+  useEffect(() => {
+    fetchProperties();
     setImage(randomImage);
     setRating(randomRating);
   }, [macPort]);
@@ -185,6 +261,10 @@ function Home() {
       const errorMsg = error.response?.data?.error || "Error creating property";
       console.log(errorMsg);
     }
+  };
+
+  const handleDeleteProperty = (id) => {
+    fetchProperties();
   };
 
   return (
@@ -337,10 +417,12 @@ function Home() {
           <div className="allPropertiesContainer">
             {currentProperties.map((propObj) => (
               <PropertyCard
-                key={propObj.id} // Add a unique key if available
+                key={propObj._id}
+                id={propObj._id}
                 houseName={propObj.houseName}
                 rooms={propObj.rooms}
                 image={propObj.image}
+                onDelete={handleDeleteProperty}
               />
             ))}
           </div>
@@ -352,13 +434,13 @@ function Home() {
           <div className="listYourPropertySectionImgForm">
             <h1 style={{ fontSize: "64px" }}>List your property</h1>
             <form className="listHouseForm" onSubmit={handlePropertySubmit}>
-              <div class="form-group">
-                <label for="inputHouseName" className="listHouseLabel">
+              <div className="form-group">
+                <label htmlFor="inputHouseName" className="listHouseLabel">
                   House name
                 </label>
                 <input
                   type="text"
-                  class="listHouseInput"
+                  className="listHouseInput"
                   id="inputHouseName"
                   placeholder="Enter house name..."
                   value={houseName}
@@ -366,13 +448,13 @@ function Home() {
                 ></input>
               </div>
 
-              <div class="form-group">
-                <label for="inputHouseDesc" className="listHouseLabel">
+              <div className="form-group">
+                <label htmlFor="inputHouseDesc" className="listHouseLabel">
                   House description
                 </label>
                 <input
                   type="text"
-                  class="listHouseInput"
+                  className="listHouseInput"
                   id="inputHouseDesc"
                   placeholder="Enter house description..."
                   value={houseDescription}
@@ -382,28 +464,28 @@ function Home() {
 
               <div className="form-split">
                 <div
-                  class="form-group"
+                  className="form-group"
                   style={{ width: "48%", marginRight: "4%" }}
                 >
-                  <label for="inputHouseRooms" className="listHouseLabel">
+                  <label htmlFor="inputHouseRooms" className="listHouseLabel">
                     Rooms
                   </label>
                   <input
                     type="text"
-                    class="listHouseInput"
+                    className="listHouseInput"
                     id="inputHouseRooms"
                     placeholder="Enter rooms..."
                     value={rooms}
                     onChange={(e) => setRooms(e.target.value)}
                   ></input>
                 </div>
-                <div class="form-group" style={{ width: "48%" }}>
-                  <label for="inputHousePrice" className="listHouseLabel">
+                <div className="form-group" style={{ width: "48%" }}>
+                  <label htmlFor="inputHousePrice" className="listHouseLabel">
                     Price
                   </label>
                   <input
                     type="text"
-                    class="listHouseInput"
+                    className="listHouseInput"
                     id="inputHousePrice"
                     placeholder="Enter house price..."
                     value={price}
@@ -412,15 +494,15 @@ function Home() {
                 </div>
               </div>
 
-              <div class="form-group">
-                <label for="inputHouseAdress" className="listHouseLabel">
-                  House adress
+              <div className="form-group">
+                <label htmlFor="inputHouseAdress" className="listHouseLabel">
+                  House address
                 </label>
                 <input
                   type="text"
-                  class="listHouseInput"
+                  className="listHouseInput"
                   id="inputHouseAdress"
-                  placeholder="Enter house adress..."
+                  placeholder="Enter house address..."
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
                 ></input>
@@ -443,7 +525,7 @@ function Home() {
                 </label>
               </div>
 
-              <button type="submit" class="listHouseSubmitBtn">
+              <button type="submit" className="listHouseSubmitBtn">
                 Submit
               </button>
             </form>
