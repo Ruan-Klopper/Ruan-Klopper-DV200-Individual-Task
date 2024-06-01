@@ -64,19 +64,6 @@ router.delete("/delete/:id", async (req, res) => {
   }
 });
 
-// Delete property by ID 2
-router.post("/deleteProperty/:id", async (req, res) => {
-  const { id } = req.body;
-  try {
-    Property.deleteOne({ _id: id }, function (err, res) {
-      console.log(err);
-    });
-    res.send({ status: "Ok", data: "Deleted" });
-  } catch (error) {
-    console.log(error);
-  }
-});
-
 // Update property by ID
 router.put("/update/:id", async (req, res) => {
   const { id } = req.params;
